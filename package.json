@@ -11,6 +11,12 @@
     "type": "git",
     "url": "https://github.com/muuvlabs/openai-cost-calculator"
   },
+  "publishConfig": {
+    "registry": "https://npm.muuvlabs.com"
+  },
+  "engines": {
+    "node": ">=16.0"
+  },
   "keywords": [
     "openai",
     "gpt",
