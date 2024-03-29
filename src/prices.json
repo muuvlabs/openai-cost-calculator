@@ -32,6 +32,30 @@
             "Input": 0.003,
             "Output": 0.004
         },
+        "gpt-4-0125-preview": {
+            "Input": 0.01,
+            "Output": 0.03
+        },
+        "gpt-4-1106-preview": {
+            "Input": 0.01,
+            "Output": 0.03
+        },
+        "gpt-4-1106-vision-preview": {
+            "Input": 0.01,
+            "Output": 0.03
+        },
+        "gpt-4-32k": {
+            "Input": 0.06,
+            "Output": 0.12
+        },
+        "gpt-3.5-turbo-0125": {
+            "Input": 0.0005,
+            "Output": 0.0015
+        },
+        "gpt-3.5-turbo-instruct": {
+            "Input": 0.0015,
+            "Output": 0.002
+        },
         "text-ada-001": {
                 "Input": 0.0004,
                 "Output": 0.0004
@@ -84,7 +108,8 @@
       "Resolution": {
           "1024x1024": 0.02,
           "512x512": 0.018,
-          "256x256": 0.016
+          "256x256": 0.016,
+          "150x150": 0.00255
       }
   },
   "AudioModels": {
