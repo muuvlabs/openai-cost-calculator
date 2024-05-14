@@ -48,6 +48,14 @@
             "Input": 0.01,
             "Output": 0.03
         },
+        "gpt-4o": {
+          "Input": 0.005,
+          "Output": 0.015
+        },
+        "gpt-4o-2024-05-13": {
+          "Input": 0.005,
+          "Output": 0.015
+        },
         "gpt-4-32k": {
             "Input": 0.06,
             "Output": 0.12
