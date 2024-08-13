@@ -3,11 +3,12 @@ const { didYouMean } = require('./suggester');
 
 function formattedTotalCost(totalCost) {
     if(totalCost < 0.001) {
-        return "$"+totalCost.toFixed(4);
+        return "$" + totalCost.toFixed(4);
     } else if(totalCost < 0.01) {
-        return "$"+totalCost.toFixed(3);
+        // Round up to the nearest cent if the cost is close
+        return "$" + totalCost.toFixed(3);
     } else {
-        return "$"+totalCost.toFixed(2);
+        return "$" + totalCost.toFixed(2);
     }
 }
 
@@ -22,11 +23,14 @@ const calculateLanguageModelCost = (modelName, {promptTokens, completionTokens})
     if(!completionTokens) completionTokens = 0;
     promptTokens /= 1000;
     completionTokens /= 1000;
+    const promptCost = pricePerToken["Input"] * promptTokens;
+    const completionCost = pricePerToken["Output"] * completionTokens;
+    const totalCost = promptCost + completionCost;
     return {
-        promptCost: pricePerToken["Input"] * promptTokens,
-        completionCost: pricePerToken["Output"] * completionTokens,
-        totalCost: pricePerToken["Input"] * promptTokens + pricePerToken["Input"] * completionTokens,
-        formattedTotalCost: formattedTotalCost(pricePerToken["Input"] * promptTokens + pricePerToken["Input"] * completionTokens)
+        promptCost,
+        completionCost,
+        totalCost,
+        formattedTotalCost: formattedTotalCost(totalCost)
     }
 }
 

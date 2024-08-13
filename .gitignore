@@ -3,3 +3,19 @@ node_modules
 .DS_Store
 *.log
 .aider*
+# Node modules
+node_modules/
+
+# Jest coverage
+coverage/
+
+# npm debug log
+npm-debug.log*
+
+# IDE files
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
