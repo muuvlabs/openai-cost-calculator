@@ -16,25 +16,25 @@ describe('OpenAI Cost Calculator', () => {
   });
 
   test('calculateFineTuningModelCost for Ada', () => {
-    const result = calculateFineTuningModelCost('ada', 1000, 'Training');
+    const result = calculateFineTuningModelCost('babbage-002', 1000, 'training');
     expect(result.totalCost).toBeCloseTo(0.4, 5);
     expect(result.formattedTotalCost).toBe('$0.40');
   });
 
   test('calculateEmbeddingModelCost for Ada', () => {
-    const result = calculateEmbeddingModelCost('ada', 1000);
+    const result = calculateEmbeddingModelCost('text-embedding-ada-002', 1000);
     expect(result.totalCost).toBeCloseTo(0.1, 5);
     expect(result.formattedTotalCost).toBe('$0.10');
   });
 
   test('calculateImageModelCost for 1024x1024', () => {
-    const result = calculateImageModelCost('1024x1024', 5);
-    expect(result.totalCost).toBeCloseTo(0.1, 5);
-    expect(result.formattedTotalCost).toBe('$0.10');
+      const result = calculateImageModelCost('dall-e-3', 1024, 1024, 5);
+    expect(result.totalCost).toBeCloseTo(0.2, 5);
+    expect(result.formattedTotalCost).toBe('$0.20');
   });
 
   test('calculateAudioModelCost for Whisper', () => {
-    const result = calculateAudioModelCost('whisper-1', 10);
+    const result = calculateAudioModelCost('whisper', 10);
     expect(result.totalCost).toBeCloseTo(0.06, 5);
     expect(result.formattedTotalCost).toBe('$0.06');
   });

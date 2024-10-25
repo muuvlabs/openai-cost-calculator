@@ -14,17 +14,17 @@ function formattedTotalCost(totalCost) {
 
 const calculateLanguageModelCost = (modelName, {promptTokens, completionTokens}) => {
     modelName = modelName.toLowerCase();
-    let pricePerToken = prices.LanguageModels[modelName]
+    let pricePerToken = prices.models[modelName]
     if (pricePerToken == null) {
       // Closest other model find
-        throw new Error('Unknown model `' + modelName+"`, Did you mean `"+ didYouMean(modelName, Object.keys(prices.LanguageModels))+"`?");
+        throw new Error('Unknown model `' + modelName+"`, Did you mean `"+ didYouMean(modelName, Object.keys(prices.models))+"`?");
     }
     if(!promptTokens) promptTokens = 0;
     if(!completionTokens) completionTokens = 0;
     promptTokens /= 1000;
     completionTokens /= 1000;
-    const promptCost = pricePerToken["Input"] * promptTokens;
-    const completionCost = pricePerToken["Output"] * completionTokens;
+    const promptCost = pricePerToken["input"] * promptTokens;
+    const completionCost = pricePerToken["output"] * completionTokens;
     const totalCost = promptCost + completionCost;
     return {
         promptCost,
@@ -36,8 +36,8 @@ const calculateLanguageModelCost = (modelName, {promptTokens, completionTokens})
 
 const calculateFineTuningModelCost = (modelName, tokens, operation) => {
     modelName = modelName.toLowerCase();
-    let pricePerToken = prices.FineTuningModels[modelName]
-        ? prices.FineTuningModels[modelName][operation]
+    let pricePerToken = prices["fine-tuning"][modelName]
+        ? prices["fine-tuning"][modelName][operation]
         : null;
     if (pricePerToken == null) {
         throw new Error('Unknown model');
@@ -51,8 +51,8 @@ const calculateFineTuningModelCost = (modelName, tokens, operation) => {
 
 const calculateEmbeddingModelCost = (modelName, tokens) => {
     modelName = modelName.toLowerCase();
-    let pricePerToken = prices.EmbeddingModels[modelName]
-        ? prices.EmbeddingModels[modelName]["Usage"]
+    let pricePerToken = prices["embedding"][modelName]
+        ? prices["embedding"][modelName]
         : null;
     if (pricePerToken == null) {
         throw new Error('Unknown model');
@@ -65,8 +65,8 @@ const calculateEmbeddingModelCost = (modelName, tokens) => {
 }
 
 
-const calculateImageModelCost = (resolution, images) => {
-    let pricePerImage = prices.ImageModels["Resolution"][resolution];
+const calculateImageModelCost = (model, width, height, images, quality = "standard") => {
+    let pricePerImage = prices["image"][model][`${quality}-${width}-${height}`];
     const totalCost = pricePerImage * images;
     return {
         totalCost,
@@ -76,8 +76,8 @@ const calculateImageModelCost = (resolution, images) => {
 
 const calculateAudioModelCost = (modelName, minutes) => {
     modelName = modelName.toLowerCase();
-    let pricePerMinute = prices.AudioModels[modelName]
-        ? prices.AudioModels[modelName]["Usage"]
+    let pricePerMinute = prices["audio"][modelName]
+        ? prices["audio"][modelName]
         : null;
     if (pricePerMinute == null) {
         throw new Error('Unknown model');

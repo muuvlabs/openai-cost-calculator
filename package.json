@@ -4,6 +4,7 @@
   "description": "Easily calculate the cost of your OpenAI Usage",
   "main": "src/index.js",
   "scripts": {
+    "update-prices": "https --download -o src/prices.json raw.githubusercontent.com/outl1ne/openai-pricing/refs/heads/main/pricing.json",
     "test": "jest"
   },
   "license": "ISC",
